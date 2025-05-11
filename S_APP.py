@@ -15,10 +15,10 @@ if uploaded_file is not None:
     st.dataframe(df.head())
 
     # Step 2: Validate structure
-    if 'DrugName' not in df.columns:
-        st.error("CSV must contain a 'DrugName' column.")
+    if 'DRUG NAME' not in df.columns:
+        st.error("CSV must contain a 'DRUG NAME' column.")
     else:
-        drug_list = df['DrugName'].dropna().unique().tolist()
+        drug_list = df['DRUG NAME'].dropna().unique().tolist()
 
         st.subheader("🔍 Drug Categories")
         
@@ -46,7 +46,7 @@ if uploaded_file is not None:
         search_drug = st.selectbox("Search for a drug name:", drug_list)
 
         # Filter for exact and similar drug names
-        matched_drugs = df[df['DrugName'].str.contains(search_drug, case=False, na=False)]
+        matched_drugs = df[df['DRUG NAME'].str.contains(search_drug, case=False, na=False)]
 
         st.markdown(f"### 🧾 Details for '{search_drug}' and similar drugs:")
         st.dataframe(matched_drugs.reset_index(drop=True))
